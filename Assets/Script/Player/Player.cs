@@ -5,7 +5,8 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    public Rigidbody2D myRigidbody;
+    public GameObject Teste1;
+    public Rigidbody2D myRigidbody; 
 
     [Header("Speed setup")]
     public Vector2 friction = new Vector2(0.1f, 0);
@@ -20,6 +21,8 @@ public class Player : MonoBehaviour
     public Ease ease = Ease.OutBack;
 
     private float _CurrentSpeed;
+    private bool Plataform = false;
+    private BoxCollider2D boxCollider;
 
     void Update()
     {
@@ -38,20 +41,22 @@ public class Player : MonoBehaviour
             _CurrentSpeed = speed;
         }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
             myRigidbody.velocity = new Vector2(-_CurrentSpeed, myRigidbody.velocity.y);
 
-        }else if (Input.GetKey(KeyCode.RightArrow))
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             myRigidbody.velocity = new Vector2(_CurrentSpeed, myRigidbody.velocity.y);
 
         }
 
-        if(myRigidbody.velocity.x > 0)
+        if (myRigidbody.velocity.x > 0)
         {
             myRigidbody.velocity -= friction;
-        }else if(myRigidbody.velocity.x < 0)
+        }
+        else if (myRigidbody.velocity.x < 0)
         {
             myRigidbody.velocity += friction;
         }
@@ -61,13 +66,28 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myRigidbody.velocity = Vector2.up * forcejump;
-            myRigidbody.transform.localScale = Vector2.one;
+            boxCollider = GetComponent<BoxCollider2D>();
 
-            DOTween.Kill(myRigidbody.transform);
+            ContactPoint2D[] contacts = new ContactPoint2D[10];
+            int numContacts = boxCollider.GetContacts(contacts);
 
-            HandleScaleJump();
+            for (int i = 0; i < numContacts; i++)
+            {
+                Collider2D otherCollider = contacts[i].collider;
+
+                if (otherCollider.gameObject.CompareTag("Plataform"))
+                {
+
+                    myRigidbody.velocity = Vector2.up * forcejump;
+                    myRigidbody.transform.localScale = Vector2.one;
+
+                    DOTween.Kill(myRigidbody.transform);
+
+                    HandleScaleJump();
+                }
+            }
         }
+        
     }
 
     private void HandleScaleJump()
@@ -75,5 +95,7 @@ public class Player : MonoBehaviour
         myRigidbody.transform.DOScaleY(jumpScaleY, animationduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
         myRigidbody.transform.DOScaleX(jumpScaleX, animationduration).SetLoops(2, LoopType.Yoyo).SetEase(ease);
     }
+
+
 
 }
