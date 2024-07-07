@@ -36,7 +36,6 @@ public class GameManager : Singleton<GameManager>
 
     private void SpawPlayer()
     {
-        Debug.Log("akiiiii");
         _CurrentPlayer = Instantiate(PlayerPrefab);
         _CurrentPlayer.transform.position = StartPoint.transform.position;
         _CurrentPlayer.transform.DOScale(0, duration).SetEase(ease).From().SetDelay(delay);
