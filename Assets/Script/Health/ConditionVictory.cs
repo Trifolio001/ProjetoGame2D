@@ -6,7 +6,7 @@ public class ConditionVictory : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var health = collision.gameObject.GetComponent<HealthBase>();
+        var health = collision.gameObject.GetComponent<HealthBasePlayer>();
 
         if (health != null)
         {

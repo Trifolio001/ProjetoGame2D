@@ -5,7 +5,7 @@ using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
-    public Vector2 PositionInicial;
+    public Vector3 PositionInicial;
     public BoxCollider2D boxCollider;
     public Rigidbody2D myRigidbody;
 
