@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1230544806516750435}
   - component: {fileID: 1230544806516750432}
   - component: {fileID: 6058281947385272927}
+  - component: {fileID: 2647374471328578535}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -80,6 +81,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2647374471328578535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230544806516750438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107c1919157e7e3418667644905bfd0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  StarLife: 5
+  DestroyOnKill: 1
+  dalayToKill: 0.3
+  Menu: {fileID: 0}
+  MenuConditionVictory: {fileID: 0}
+  MenuConditionLoser: {fileID: 0}
+  _flashcolor: {fileID: 0}
 --- !u!212 &1230544805769238922
 SpriteRenderer:
   m_ObjectHideFlags: 0

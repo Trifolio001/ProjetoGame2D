@@ -589,6 +589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  healtBase: {fileID: 0}
 --- !u!1 &931104575415265019
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,9 +1516,11 @@ GameObject:
   - component: {fileID: 931104575813146258}
   - component: {fileID: 931104575813146259}
   - component: {fileID: 1802846148333310324}
+  - component: {fileID: 7859180250611210334}
+  - component: {fileID: 8698479578441248145}
   m_Layer: 8
   m_Name: EnemyTest
-  m_TagString: Player
+  m_TagString: Enimy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1632,6 +1635,57 @@ MonoBehaviour:
   InPlataform: 0
   animation: {fileID: 931104576076469031}
   animation2: {fileID: 7825717499713970977}
+  timeMaxActiveOff: 20
+--- !u!114 &7859180250611210334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931104575813146256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac59406af07341b4994b005c04cc153e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StarLife: 10
+  DestroyOnKill: 1
+  dalayToKill: 0
+--- !u!114 &8698479578441248145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931104575813146256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2081a9ff8cb2640b47cedd686312f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderers:
+  - {fileID: 931104575253090924}
+  - {fileID: 931104576860278220}
+  - {fileID: 931104577048150148}
+  - {fileID: 931104576362507413}
+  - {fileID: 931104575033548346}
+  - {fileID: 931104575463828983}
+  - {fileID: 931104576099992214}
+  - {fileID: 931104575534330100}
+  - {fileID: 931104576096259473}
+  - {fileID: 931104576388960962}
+  - {fileID: 931104575025570291}
+  - {fileID: 931104576661023133}
+  - {fileID: 931104576735879189}
+  - {fileID: 931104575049644829}
+  - {fileID: 931104576782036957}
+  - {fileID: 931104575802577013}
+  - {fileID: 931104575415264964}
+  - {fileID: 931104575483628960}
+  - {fileID: 931104576432984237}
+  - {fileID: 931104575759679720}
+  color: {r: 1, g: 0, b: 0, a: 1}
+  duration: 0.001
 --- !u!1 &931104575827566148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3018,6 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  healtBase: {fileID: 0}
 --- !u!1 &931104576976270465
 GameObject:
   m_ObjectHideFlags: 0

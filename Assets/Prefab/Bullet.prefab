@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 871722854321490054}
   - component: {fileID: 871722854321490048}
   - component: {fileID: 871722854321490055}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Ball1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871722854321490053}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -74.75, y: -40.34, z: 0.6425543}
+  m_LocalPosition: {x: 0.772, y: 0, z: 0}
   m_LocalScale: {x: 1.9711761, y: 1.0688689, z: 1}
   m_Children: []
   m_Father: {fileID: 871722854459502274}
@@ -111,9 +111,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 871722854459502274}
-  m_Layer: 0
+  - component: {fileID: 8008031118969416459}
+  - component: {fileID: 8882230680667771714}
+  m_Layer: 10
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +135,45 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &8008031118969416459
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871722854459502273}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.75228465, y: 0.009977274}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.8420799, y: 0.4293012}
+  m_EdgeRadius: 0
+--- !u!114 &8882230680667771714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871722854459502273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0332ce3442e824489d1c956d9409bdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: -30, y: 0, z: 0}
+  timedestroy: 2
+  side: 1
+  damage: 1

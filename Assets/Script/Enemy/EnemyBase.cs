@@ -6,6 +6,8 @@ public class EnemyBase : MonoBehaviour
 {
     public int damage = 10;
 
+    public HealthBase healtBase;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var health = collision.gameObject.GetComponent<HealthBasePlayer>();
@@ -14,5 +16,11 @@ public class EnemyBase : MonoBehaviour
         {
             health.Damage(damage);
         }
+    }
+
+
+    public void Damage(int dano)
+    {
+        healtBase.Damage(dano);
     }
 }

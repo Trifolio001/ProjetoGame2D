@@ -4,34 +4,43 @@ using UnityEngine;
 
 public class HealthBase : MonoBehaviour
 {
-    public Player player;
     public int StarLife = 10;
     public bool DestroyOnKill = false;
     public float dalayToKill = 0f;
 
-    public GameObject Menu;
+    /*public GameObject Menu;
     public GameObject MenuConditionVictory;
-    public GameObject MenuConditionLoser;
+    public GameObject MenuConditionLoser;*/
 
     private int _currentLife;
     private bool _isDead = false;
 
+    public FlashColor _flashcolor;
+
     private void Awake()
     {
         ConditionInitLife();
+        if (_flashcolor == null)
+        {
+            _flashcolor = GetComponent<FlashColor>();
+        }
     }
 
     public void ConditionInitLife()
     {
         _isDead = false;
         _currentLife = StarLife;
-        Menu.SetActive(false);
+        /*Menu.SetActive(false);
         MenuConditionVictory.SetActive(false);
-        MenuConditionLoser.SetActive(false);
-}
+        MenuConditionLoser.SetActive(false);*/
+    }
 
     public void Damage(int damage)
     {
+        if (_flashcolor != null)
+        {
+            _flashcolor.Flash();
+        }
         if (_isDead) return;
         _currentLife -= damage;
 
@@ -41,12 +50,12 @@ public class HealthBase : MonoBehaviour
         }
     }
 
-    public void VictoryPlayer()
+    /*public void VictoryPlayer()
     {
         Menu.SetActive(true);
         MenuConditionVictory.SetActive(true);
         MenuConditionLoser.SetActive(false);
-    }
+    }*/
 
     public void kill()
     {
@@ -60,12 +69,12 @@ public class HealthBase : MonoBehaviour
 
     IEnumerator AnimationKill()
     {
-        player.KillPlayer();
+        //player.KillPlayer();
         yield return new WaitForSeconds(2);
-        player.StopKillPlayer();
+        //player.StopKillPlayer();
         gameObject.SetActive(false);
-        Menu.SetActive(true);
-        MenuConditionVictory.SetActive(false);
-        MenuConditionLoser.SetActive(true);
+        //Menu.SetActive(true);
+        //MenuConditionVictory.SetActive(false);
+        //MenuConditionLoser.SetActive(true);
     }
 }
