@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,12 @@ using UnityEngine;
 public class HealthBase : MonoBehaviour
 {
     public int StarLife = 10;
-    public bool DestroyOnKill = false;
-    public float dalayToKill = 0f;
-
-    /*public GameObject Menu;
-    public GameObject MenuConditionVictory;
-    public GameObject MenuConditionLoser;*/
-
     private int _currentLife;
     private bool _isDead = false;
 
+
     public FlashColor _flashcolor;
+    public Action OnKill;
 
     private void Awake()
     {
@@ -30,9 +26,6 @@ public class HealthBase : MonoBehaviour
     {
         _isDead = false;
         _currentLife = StarLife;
-        /*Menu.SetActive(false);
-        MenuConditionVictory.SetActive(false);
-        MenuConditionLoser.SetActive(false);*/
     }
 
     public void Damage(int damage)
@@ -43,38 +36,24 @@ public class HealthBase : MonoBehaviour
         }
         if (_isDead) return;
         _currentLife -= damage;
-
-        if(_currentLife <= 0)
+        if (!_isDead) {
+           
+        if (_currentLife <= 0)
         {
             kill();
+            _isDead = true;
+            }
         }
     }
 
-    /*public void VictoryPlayer()
-    {
-        Menu.SetActive(true);
-        MenuConditionVictory.SetActive(true);
-        MenuConditionLoser.SetActive(false);
-    }*/
 
     public void kill()
     {
-        _isDead = true;
-
-        if (DestroyOnKill)
+        if (_flashcolor != null)
         {
-            StartCoroutine(AnimationKill());
+            _flashcolor.OnKill();
         }
+        OnKill.Invoke(); 
     }
 
-    IEnumerator AnimationKill()
-    {
-        //player.KillPlayer();
-        yield return new WaitForSeconds(2);
-        //player.StopKillPlayer();
-        gameObject.SetActive(false);
-        //Menu.SetActive(true);
-        //MenuConditionVictory.SetActive(false);
-        //MenuConditionLoser.SetActive(true);
-    }
 }

@@ -1,3 +1,4 @@
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class EnimyControl : MonoBehaviour
     public string boolJump = "Is_Jump";
     public string boolJumpDown = "Is_JumpDown";
     public string TrigerJump = "IsJumpTrig";
-    public string TrigerKillPlayer = "IsKillPlayer";
+    public string TrigerKill = "Is_Kill";
     public string boolGun = "IsGun";
     public string boolNotGun = "IsNotGun";
     public string TrigerGun1 = "IsTrigGun";
@@ -42,12 +43,28 @@ public class EnimyControl : MonoBehaviour
     private bool timeContAttacactive = false;
 
 
+    public bool DestroyOnKill = false;
+    public float dalayToKill = 0f;
+    private int _currentLife;
+    private bool _isDead = false;
+    public HealthBase healtBase;
 
     // Start is called before the first frame update
     void Awake()
     {
         //PositionInicial = transform.position;
         ConditionInitial();
+        if (healtBase != null)
+        {
+            healtBase.OnKill += OnEnemyKill;
+        }
+    }
+
+
+    private void OnEnemyKill()
+    {
+        healtBase.OnKill -= OnEnemyKill;
+        ActiveKill();
     }
 
     public void ConditionInitial()
@@ -72,50 +89,63 @@ public class EnimyControl : MonoBehaviour
 
     void Update()
     {
-        if (state != STATES.ATTACK)
+
+        if (!_isDead)
         {
-            if (timeCont){
-                timeCont = false;
-                RandowTime();
-                Invoke(nameof(VerificationFinishUsage), TimeWait);
+            if (state != STATES.ATTACK)
+            {
+                if (timeCont) {
+                    timeCont = false;
+                    RandowTime();
+                    Invoke(nameof(VerificationFinishUsage), TimeWait);
+                }
+            }
+            else
+            {
+                if (timeContAttac && timeContAttacactive)
+                {
+                    timeContAttac = false;
+                    Invoke(nameof(VerificationFinishUsageAttac), 1);
+                }
+            }
+
+            //Debug.Log("stop = " + state);
+            switch (state)
+            {
+                case STATES.WAITING:
+
+                    break;
+                case STATES.WALK:
+
+                    myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
+                    myRigidbody.transform.localScale = MovimenAngle;
+                    break;
+                case STATES.ATTACK:
+                    /*if (target != null)
+                    {
+                        Vector2 direction = target.transform.position - transform.position;
+                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                    }*/
+                    int directionA = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
+                    if (directionA != direction)
+                    {
+                        direction = directionA;
+                        DirectionAttack();
+                    }
+                    myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
+                    myRigidbody.transform.localScale = MovimenAngle;
+                    break;
             }
         }
         else
         {
-            if (timeContAttac && timeContAttacactive)
-            {
-                timeContAttac = false;
-                Invoke(nameof(VerificationFinishUsageAttac), 1);
-            }
+            state = STATES.WAITING;
+            animation.SetBool(boolRun, false);
+            animation2.SetBool(boolRun, false);
+            animation.SetBool(boolWalk, false);
+            animation2.SetBool(boolWalk, false);
+            timeCont = false;
         }
-
-        //Debug.Log("stop = " + state);
-        switch (state)
-        {
-            case STATES.WAITING:
-
-                break;
-            case STATES.WALK:
-
-                myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
-                myRigidbody.transform.localScale = MovimenAngle; 
-                break;
-            case STATES.ATTACK:
-                /*if (target != null)
-                {
-                    Vector2 direction = target.transform.position - transform.position;
-                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                }*/
-                int directionA = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
-                if (directionA != direction) {
-                    direction = directionA;
-                    DirectionAttack(); 
-                }
-                myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
-                myRigidbody.transform.localScale = MovimenAngle;
-                break;
-        }
-
     }
 
     private void InitiWalk()
@@ -200,6 +230,13 @@ public class EnimyControl : MonoBehaviour
             timeCont = true;
         }
     }
+
+    public void ActiveKill()
+    {
+        animation.SetBool(TrigerKill, true);
+        _isDead = true;
+    }
+
 
 
 

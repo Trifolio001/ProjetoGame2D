@@ -8,6 +8,19 @@ public class EnemyBase : MonoBehaviour
 
     public HealthBase healtBase;
 
+    private void Awake()
+    {
+        if(healtBase != null)
+        {
+            healtBase.OnKill += OnEnemyKill;
+        }
+    }
+
+    private void OnEnemyKill()
+    {
+        healtBase.OnKill -= OnEnemyKill;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         var health = collision.gameObject.GetComponent<HealthBasePlayer>();

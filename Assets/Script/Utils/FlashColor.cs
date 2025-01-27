@@ -25,16 +25,15 @@ public class FlashColor : MonoBehaviour
                
     }
 
-    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
             Flash();
+            OnKill();
             Referencetime = true;
         }
     }
-    */
 
 
     public void Flash()
@@ -66,5 +65,32 @@ public class FlashColor : MonoBehaviour
     {
         spriteRenderers.ForEach(i => i.color = Color.white);
         Referencetime = true;
+    }
+
+
+    public void OnKill()
+    {
+        StartCoroutine(OperaçãodeTempoSumir());
+    }
+
+    IEnumerator OperaçãodeTempoSumir()
+    {
+        yield return new WaitForSeconds(2f);
+        for (float i = 1; i >= 0; i -= 0.2f)
+        {
+            yield return new WaitForSeconds(0.3f);
+            SetTransparency(i);
+        }
+        Destroy(gameObject, 0.1f);
+    }
+    public void SetTransparency(float alpha)
+    {
+        spriteRenderers.ForEach(i =>
+        {
+            Color color = i.color; 
+            color.a = alpha; 
+            i.color = color; 
+        });
+
     }
 }
