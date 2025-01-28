@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnimyControl : MonoBehaviour
 {
     public Rigidbody2D myRigidbody;
+    public BoxCollider2D myBoxCollider;
     public float ScaleEnimy;
     public float _CurrentSpeed;
     public float _CurrentSpeedRun;
@@ -49,6 +50,9 @@ public class EnimyControl : MonoBehaviour
     private bool _isDead = false;
     public HealthBase healtBase;
 
+    public BoxCollider2D BoxColliderhand1;
+    public BoxCollider2D BoxColliderhand2;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -58,6 +62,7 @@ public class EnimyControl : MonoBehaviour
         {
             healtBase.OnKill += OnEnemyKill;
         }
+
     }
 
 
@@ -79,7 +84,7 @@ public class EnimyControl : MonoBehaviour
         //gameObject.SetActive(true);
         //myRigidbody.transform.localScale = new Vector2(ScalePlayer, ScalePlayer);
         //RespawPlayerGame();
-        //gameObject.transform.localPosition = PositionInicial;
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
         //gameObject.transform.localRotation = Quaternion.Euler(Vector2.zero);
         //animation.SetBool(TrigerJump, true);
         //animation2.SetBool(TrigerJump, true);
@@ -235,9 +240,10 @@ public class EnimyControl : MonoBehaviour
     {
         animation.SetBool(TrigerKill, true);
         _isDead = true;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        myBoxCollider.size = new Vector2 (0,0);
+        BoxColliderhand1.enabled = false;  
+        BoxColliderhand2.enabled = false;
     }
-
-
-
 
 }

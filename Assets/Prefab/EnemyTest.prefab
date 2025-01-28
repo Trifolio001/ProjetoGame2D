@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c61545d9ead7e4abda47a89a13fafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 3
   healtBase: {fileID: 0}
 --- !u!1 &931104575415265019
 GameObject:
@@ -1619,6 +1619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 931104575813146258}
+  myBoxCollider: {fileID: 931104575813146269}
   ScaleEnimy: 0.9
   _CurrentSpeed: 2
   _CurrentSpeedRun: 5
@@ -1634,11 +1635,13 @@ MonoBehaviour:
   TrigerGun1: IsTrigGun
   InPlataform: 0
   animation: {fileID: 931104576076469031}
-  animation2: {fileID: 0}
+  animation2: {fileID: 6469740879736356055}
   timeMaxActiveOff: 20
   DestroyOnKill: 0
   dalayToKill: 0
   healtBase: {fileID: 7859180250611210334}
+  BoxColliderhand1: {fileID: 931104576950276668}
+  BoxColliderhand2: {fileID: 931104575255182573}
 --- !u!114 &7859180250611210334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3073,7 +3076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c61545d9ead7e4abda47a89a13fafe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 3
   healtBase: {fileID: 0}
 --- !u!1 &931104576976270465
 GameObject:
