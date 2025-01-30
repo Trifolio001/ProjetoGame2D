@@ -28,26 +28,26 @@ public class EnimyControl : MonoBehaviour
     public Animator animation2;
 
     private float TimeWait = 0;
-    private int direction;
-    enum STATES { WAITING, WALK, ATTACK };
-    STATES state;
+    protected int direction;
+    protected enum STATES { WAITING, WALK, ATTACK, JUMP };
+    protected STATES state;
 
     //private int timeMaxActiveOff = 5;
     //private int timeActiveOff = 0;
     private bool timeCont = true;
 
-    private float Moviment = 0;
-    private Vector3 MovimenAngle = new Vector3(0, 0, 0);
+    protected float Moviment = 0;
+    protected Vector3 MovimenAngle = new Vector3(0, 0, 0);
 
     public int timeMaxActiveOff = 20;
     private bool timeContAttac = true;
-    private bool timeContAttacactive = false;
+    protected bool timeContAttacactive = false;
 
 
     public bool DestroyOnKill = false;
     public float dalayToKill = 0f;
     private int _currentLife;
-    private bool _isDead = false;
+    protected bool _isDead = false;
     public HealthBase healtBase;
 
     public BoxCollider2D BoxColliderhand1;
@@ -58,10 +58,6 @@ public class EnimyControl : MonoBehaviour
     {
         //PositionInicial = transform.position;
         ConditionInitial();
-        if (healtBase != null)
-        {
-            healtBase.OnKill += OnEnemyKill;
-        }
 
     }
 
@@ -72,7 +68,7 @@ public class EnimyControl : MonoBehaviour
         ActiveKill();
     }
 
-    public void ConditionInitial()
+    public virtual void ConditionInitial()
     {
         timeCont = true;
         RandowTime();
@@ -90,74 +86,86 @@ public class EnimyControl : MonoBehaviour
         //animation2.SetBool(TrigerJump, true);
         //animation2.SetBool(boolGun, false);
         //animation2.SetBool(boolNotGun, false);
+        if (healtBase != null)
+        {
+            healtBase.OnKill += OnEnemyKill;
+        }
     }
 
     void Update()
     {
-
         if (!_isDead)
         {
-            if (state != STATES.ATTACK)
-            {
-                if (timeCont) {
-                    timeCont = false;
-                    RandowTime();
-                    Invoke(nameof(VerificationFinishUsage), TimeWait);
-                }
-            }
-            else
-            {
-                if (timeContAttac && timeContAttacactive)
-                {
-                    timeContAttac = false;
-                    Invoke(nameof(VerificationFinishUsageAttac), 1);
-                }
-            }
+            StateEnimy();
+        }
+        else
+        {
+            StateEnimyKill();
+        }
+    }
 
-            //Debug.Log("stop = " + state);
-            switch (state)
-            {
-                case STATES.WAITING:
-
-                    break;
-                case STATES.WALK:
-
-                    myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
-                    myRigidbody.transform.localScale = MovimenAngle;
-                    break;
-                case STATES.ATTACK:
-                    /*if (target != null)
-                    {
-                        Vector2 direction = target.transform.position - transform.position;
-                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                    }*/
-                    int directionA = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
-                    if (directionA != direction)
-                    {
-                        direction = directionA;
-                        DirectionAttack();
-                    }
-                    myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
-                    myRigidbody.transform.localScale = MovimenAngle;
-                    break;
+    public virtual void StateEnimy() {
+        if (state != STATES.ATTACK)
+        {
+            if (timeCont) {
+                timeCont = false;
+                RandowTime();
+                Invoke(nameof(VerificationFinishUsage), TimeWait);
             }
         }
         else
         {
-            state = STATES.WAITING;
-            animation.SetBool(boolRun, false);
-            animation2.SetBool(boolRun, false);
-            animation.SetBool(boolWalk, false);
-            animation2.SetBool(boolWalk, false);
-            timeCont = false;
+            if (timeContAttac && timeContAttacactive)
+            {
+                timeContAttac = false;
+                Invoke(nameof(VerificationFinishUsageAttac), 1);
+            }
         }
+
+        switch (state)
+        {
+            case STATES.WAITING:
+
+                break;
+            case STATES.WALK:
+
+                myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
+                myRigidbody.transform.localScale = MovimenAngle;
+                break;
+            case STATES.ATTACK:
+                /*if (target != null)
+                {
+                    Vector2 direction = target.transform.position - transform.position;
+                    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                }*/
+                int directionA = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
+                if (directionA != direction)
+                {
+                    direction = directionA;
+                    DirectionAttack();
+                }
+                myRigidbody.velocity = new Vector2(Moviment, myRigidbody.velocity.y);
+                myRigidbody.transform.localScale = MovimenAngle;
+                break;
+        }
+
+    }
+
+    public virtual void StateEnimyKill()
+    {
+        state = STATES.WAITING;
+        animation.SetBool(boolRun, false);
+        animation2.SetBool(boolRun, false);
+        animation.SetBool(boolWalk, false);
+        animation2.SetBool(boolWalk, false);
+        timeCont = false;
     }
 
     private void InitiWalk()
     {
         int RandomStart = ((int)Random.Range(0, 2) * 2 - 1);
         Moviment = (-(RandomStart) * _CurrentSpeed);
-        MovimenAngle = new Vector3(RandomStart*ScaleEnimy, ScaleEnimy, ScaleEnimy);
+        MovimenAngle = new Vector3(RandomStart * ScaleEnimy, ScaleEnimy, ScaleEnimy);
     }
 
     private void RandowTime()
@@ -187,8 +195,9 @@ public class EnimyControl : MonoBehaviour
                 timeCont = true;
             }
         }
-        Debug.Log("timer = " + timeMaxActiveOff);
-        timeMaxActiveOff++;
+        if (state != STATES.JUMP) {            
+            timeMaxActiveOff++; 
+        }
         timeContAttac = true;
     }
 
@@ -196,13 +205,21 @@ public class EnimyControl : MonoBehaviour
     public void ActiveAttack(GameObject transformObj)
     {
         target = transformObj;
-        state = STATES.ATTACK;
-        direction = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
-        DirectionAttack();
+        InitialAttack();
         timeContAttacactive = false;
     }
 
-    public void DirectionAttack()
+    public void InitialAttack()
+    {
+        if (state != STATES.JUMP) 
+        { 
+            state = STATES.ATTACK;
+            direction = (target.transform.position.x - transform.position.x) < 0 ? 1 : -1;
+            DirectionAttack();
+        }
+    }
+
+    public virtual void DirectionAttack()
     {
         Moviment = (-((direction) * _CurrentSpeedRun));
         MovimenAngle = new Vector3(direction * ScaleEnimy, ScaleEnimy, ScaleEnimy);
@@ -212,6 +229,7 @@ public class EnimyControl : MonoBehaviour
 
     public void DesactiveAttack()
     {
+
         timeContAttacactive = true;
         timeMaxActiveOff = 0;
     }
@@ -236,7 +254,7 @@ public class EnimyControl : MonoBehaviour
         }
     }
 
-    public void ActiveKill()
+    public virtual void ActiveKill()
     {
         animation.SetBool(TrigerKill, true);
         _isDead = true;

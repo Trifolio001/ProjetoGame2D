@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1230544806516750432}
   - component: {fileID: 6058281947385272927}
   - component: {fileID: 2647374471328578535}
+  - component: {fileID: 8694626915306901173}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -101,6 +102,47 @@ MonoBehaviour:
   MenuConditionVictory: {fileID: 0}
   MenuConditionLoser: {fileID: 0}
   _flashcolor: {fileID: 0}
+--- !u!114 &8694626915306901173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230544806516750438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a87b460da448954988fe0bed0c3ff40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PositionInicial: {x: -11.29, y: -4.45}
+  boxCollider: {fileID: 1230544806516750432}
+  circleCollider: {fileID: 0}
+  myRigidbody: {fileID: 6058281947385272927}
+  ScalePlayer: 0.8
+  friction: {x: 0.1, y: 0}
+  speed: 5
+  speedRun: 10
+  forcejump: 20
+  boolRun: IsRun
+  boolWalk: IsWalk
+  boolJump: IsJump
+  boolJumpDown: IsJumpDown
+  TrigerJump: IsJumpTrig
+  TrigerKillPlayer: IsKillPlayer
+  boolGun: IsGun
+  boolNotGun: IsNotGun
+  TrigerGun1: IsTrigGun
+  InPlataform: 0
+  animation: {fileID: 1230544805769238932}
+  animation2: {fileID: 0}
+  DetectPlataform: {fileID: 0}
+  MaskPlataform:
+    serializedVersion: 2
+    m_Bits: 64
+  radiusWalkDetection: 30
+  radiusRunDetection: 60
+  ConditionKill: 0
+  ConditionVictory: 0
 --- !u!212 &1230544805769238922
 SpriteRenderer:
   m_ObjectHideFlags: 0
