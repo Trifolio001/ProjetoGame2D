@@ -73,6 +73,7 @@ public class EnimyControl : MonoBehaviour
         timeCont = true;
         RandowTime();
         state = STATES.WAITING;
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
         //animation TrigerReset = false;
         //animation.SetBool(TrigerReset, false);
         //boxCollider.isTrigger = false;
@@ -80,7 +81,6 @@ public class EnimyControl : MonoBehaviour
         //gameObject.SetActive(true);
         //myRigidbody.transform.localScale = new Vector2(ScalePlayer, ScalePlayer);
         //RespawPlayerGame();
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
         //gameObject.transform.localRotation = Quaternion.Euler(Vector2.zero);
         //animation.SetBool(TrigerJump, true);
         //animation2.SetBool(TrigerJump, true);
@@ -159,7 +159,7 @@ public class EnimyControl : MonoBehaviour
         animation.SetBool(boolWalk, false);
         animation2.SetBool(boolWalk, false);
         timeCont = false;
-    }
+    } 
 
     private void InitiWalk()
     {

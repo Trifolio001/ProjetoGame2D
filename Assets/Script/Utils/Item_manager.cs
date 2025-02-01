@@ -1,35 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using generic.core.Singleton;
 using TMPro;
 
 public class Item_manager : Singleton<Item_manager>
 {
 
-    //public static Item_manager Instance;
-    public int coins = 0;
-    public TextMeshProUGUI textNumCoin;
-
-    private void Awake()
-    {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-        Reset();
-    }
+    public SOint coins;
+    //public TextMeshProUGUI textNumCoin;
 
     private void Reset()
     {
-        coins = 0;
+        coins.Value = 0;
+        UpdateUi();
     }
 
     public void AddCoin(int ammount = 1)
     {
-        coins += ammount;
-        textNumCoin.text = ""+coins;
+        coins.Value += ammount;
+        UpdateUi();
     }
 
+    private void UpdateUi()
+    {
+        //UIGameManeger.Instance.UpdateTextCoins(coins.Value.ToString());
+    }
 
 }
