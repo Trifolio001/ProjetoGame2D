@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class Item_coin_Collet : Colect_Base
 {
-    //public GameObject coinObj;
+
+    [Header("setup")]
+    public SOValueCoins soCoinSetup;
+    private SpriteRenderer spritRender;
+
+    private void Awake()
+    {
+        spritRender = GetComponent<SpriteRenderer>();
+        spritRender.color = soCoinSetup.color;
+    }
 
     protected override void OnCollect()
     {        
-
         base.OnCollect();
-        Item_manager.Instance.AddCoin();
+        Item_manager.Instance.AddCoin(soCoinSetup.value);
     }
 }

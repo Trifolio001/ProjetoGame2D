@@ -8,18 +8,18 @@ using TMPro;
 public class Item_manager : Singleton<Item_manager>
 {
 
-    public SOint coins;
+    public SOInfoUI infoUI;
     //public TextMeshProUGUI textNumCoin;
 
     private void Reset()
     {
-        coins.Value = 0;
+        infoUI.Coins = 0;
         UpdateUi();
     }
 
     public void AddCoin(int ammount = 1)
     {
-        coins.Value += ammount;
+        infoUI.Coins += ammount;
         UpdateUi();
     }
 

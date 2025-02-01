@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0abf2d7b292de43bbaf5bad7f93b2f, type: 3}
-  m_Name: SOint_coins
+  m_Script: {fileID: 11500000, guid: 571985054d5cf16448eeb8e99ab1cedd, type: 3}
+  m_Name: SO_Bullet1
   m_EditorClassIdentifier: 
-  Value: 2
+  velocity: 30
+  timedestroy: 2
+  damage: 1

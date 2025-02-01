@@ -173,7 +173,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0332ce3442e824489d1c956d9409bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: -30, y: 0, z: 0}
-  timedestroy: 2
+  soBullet: {fileID: 11400000, guid: 269491adc9e67304999f7fe7d89d9bd9, type: 2}
   side: 1
-  damage: 1

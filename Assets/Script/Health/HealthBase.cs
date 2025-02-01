@@ -18,7 +18,7 @@ public class HealthBase : MonoBehaviour
         ConditionInitLife();
         if (_flashcolor == null)
         {
-            _flashcolor = GetComponent<FlashColor>();
+            _flashcolor = GetComponentInChildren<FlashColor>();
         }
     }
 

@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class FlashColor : MonoBehaviour
 {
-    public List<SpriteRenderer> spriteRenderers;
+    public List<SpriteRenderer> spriteRenderers; 
     public Color color = Color.red;
     public float duration = .001f;
 
@@ -14,25 +14,30 @@ public class FlashColor : MonoBehaviour
     private bool Referencetime = false;
     private int timeMili = 0;
 
+    public List<Color> ColorRenderers;
+
+    private void Start()
+    {
+        Invoke(nameof(OnValidate), 1f);
+    }
+
+    
+
     private void OnValidate()
     {
         Referencetime = true;
+        ColorRenderers = new List<Color>();
         spriteRenderers = new List<SpriteRenderer>();
         foreach(var child in transform.GetComponentsInChildren<SpriteRenderer>())
         {
             spriteRenderers.Add(child);
+            ColorRenderers.Add(child.color);
         }
-               
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Flash();
-            OnKill();
-            Referencetime = true;
-        }
+        
     }
 
 
@@ -63,7 +68,10 @@ public class FlashColor : MonoBehaviour
 
     public void OperaçãodeTempo()
     {
-        spriteRenderers.ForEach(i => i.color = Color.white);
+        foreach (var s in ColorRenderers)
+        {
+            spriteRenderers.ForEach(i => i.color = s);
+        }            
         Referencetime = true;
     }
 

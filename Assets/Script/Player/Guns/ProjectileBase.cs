@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class ProjectileBase : MonoBehaviour
 {
-    public Vector3 direction;
-    public float timedestroy = 2f;
+
+    public SOBullet soBullet;
     public float side = 1;
-    public int damage = 1;
 
 
     void Update()
     {
+        Vector3 direction = new Vector3(-soBullet.velocity, 0, 0);
         transform.Translate(direction * Time.deltaTime * side);
     }
 
     private void Awake()
     {
-        Destroy(gameObject, timedestroy);
+        Destroy(gameObject, soBullet.timedestroy);
     }
 
     private void Start()
@@ -31,7 +31,7 @@ public class ProjectileBase : MonoBehaviour
 
         if(enimy != null)
         {
-            enimy.Damage(damage);
+            enimy.Damage(soBullet.damage);
             Destroy(gameObject);
         }
     }

@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0abf2d7b292de43bbaf5bad7f93b2f, type: 3}
-  m_Name: SOint_coins
+  m_Script: {fileID: 11500000, guid: a5582e11891fd9244acb0790209b59a8, type: 3}
+  m_Name: SO_super_coin
   m_EditorClassIdentifier: 
-  Value: 2
+  value: 5
+  color: {r: 1, g: 0.4669811, b: 0.4669811, a: 1}

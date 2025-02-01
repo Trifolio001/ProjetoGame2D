@@ -4,75 +4,73 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-
-
-    public Vector2 PositionInicial;
     public BoxCollider2D boxCollider; 
     public CircleCollider2D circleCollider;
     public Rigidbody2D myRigidbody;
-    public float ScalePlayer;
 
-    [Header("Speed setup")]
-    public Vector2 friction = new Vector2(0.1f, 0);
-    public float speed;
-    public float speedRun;
-    public float forcejump = 2;
-
-    [Header("Animation setup")]
-    public string boolRun = "IsRun";
-    public string boolWalk = "IsWalk";
-    public string boolJump = "IsJump";
-    public string boolJumpDown = "IsJumpDown";
-    public string TrigerJump = "IsJumpTrig";
-    public string TrigerKillPlayer = "IsKillPlayer";
-    public string boolGun = "IsGun";
-    public string boolNotGun = "IsNotGun";
-    public string TrigerGun1 = "IsTrigGun"; 
+    [Header("setup")]
+    public SOPlayerSetup soPlayerSetup;
+    public SOInfoUI ReferenciaItem;
+  
     public bool InPlataform = false;
-    public Animator animation;
-    public Animator animation2;
+    public Animator _curretPlayerLegs;
+    public Animator _curretPlayerArms;
+    //public Animator animation;
+    // Animator animation2;
     public Transform DetectPlataform;
     public LayerMask MaskPlataform;
 
-    [Header("Detect Zombys")]
-    public int radiusWalkDetection = 25;
-    public int radiusRunDetection = 50;
-
-    //public float jumpScaleY = 1.5f;
-    //public float jumpScaleX = 0.5f;
-    //public float animationduration = 2;
-    //public Ease ease = Ease.OutBack;
     public bool ConditionKill;
     public bool ConditionVictory;
 
     private float _CurrentSpeed;
 
+
+    public List<Animator> animacao;
+
+
     void Awake()
     {
+      
+        Vector2 vetorref = new Vector2(0,0);
+        _curretPlayerLegs = Instantiate(soPlayerSetup.playerLegs, transform);
+        //_curretPlayerLegs.transform.position = new Vector3(0, -1.51f, 0);
+        //_curretPlayerArms = Instantiate(soPlayerSetup.referenceAnimator.referenceArm);
+        int a = 0;
+        animacao = new List<Animator>();
+        foreach (var child in transform.GetComponentsInChildren<Animator>())
+        {
+            animacao.Add(child);
+            Debug.Log(a);
+        }
+        _curretPlayerArms = animacao[animacao.Count - 1];
 
-        PositionInicial = transform.position;
+        soPlayerSetup.PositionInicial = transform.position;
         ConditionInitial();
+    }
+
+    private void Start()
+    {
+
     }
 
     public void ConditionInitial()
     {
-        //animation TrigerReset = false;
-        //animation.SetBool(TrigerReset, false);
         circleCollider.radius = 20f;
-        _CurrentSpeed = speed;
+        _CurrentSpeed = soPlayerSetup.speed;
         boxCollider.isTrigger = false;
         ConditionKill = (false);
         gameObject.SetActive(true); 
-        myRigidbody.transform.localScale = new Vector2(ScalePlayer, ScalePlayer);
+        myRigidbody.transform.localScale = new Vector2(soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
         RespawPlayerGame();
-        gameObject.transform.localPosition = PositionInicial;
+        gameObject.transform.localPosition = soPlayerSetup.PositionInicial;
         gameObject.transform.localRotation = Quaternion.Euler(Vector2.zero);
-        animation.SetBool(TrigerJump, true);
-        animation2.SetBool(TrigerJump, true);
-        animation2.SetBool(boolGun, false);
-        animation2.SetBool(boolNotGun, false);
-        animation.SetBool(boolRun, false);
-        animation2.SetBool(boolRun, false);
+        _curretPlayerLegs.SetBool(soPlayerSetup.TrigerJump, true);
+        _curretPlayerArms.SetBool(soPlayerSetup.TrigerJump, true);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolGun, false);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, false);
+        _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, false);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolRun, false);
     }
 
     void Update()
@@ -84,28 +82,28 @@ public class PlayerTest : MonoBehaviour
             InPlataform = Physics2D.OverlapCircle(DetectPlataform.position, 0.5f, MaskPlataform);
             if (InPlataform)
             {
-               animation.SetBool(boolJump, false);
-               animation2.SetBool(boolJump, false);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolJump, false);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolJump, false);
             }
             else
             {
-                if (animation.GetBool(boolJump) == false)
+                if (_curretPlayerLegs.GetBool(soPlayerSetup.boolJump) == false)
                 {
-                    animation.SetBool(TrigerJump, true);
-                    animation2.SetBool(TrigerJump, true);
+                    _curretPlayerLegs.SetBool(soPlayerSetup.TrigerJump, true);
+                    _curretPlayerArms.SetBool(soPlayerSetup.TrigerJump, true);
                 }
-                animation.SetBool(boolJump, true);
-                animation2.SetBool(boolJump, true);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolJump, true);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolJump, true);
             }
             if(myRigidbody.velocity.y <= 0)
             {
-                animation.SetBool(boolJumpDown, true);
-                animation2.SetBool(boolJumpDown, true);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolJumpDown, true);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolJumpDown, true);
             }
             else
             {
-                animation.SetBool(boolJumpDown, false);
-                animation2.SetBool(boolJumpDown, false);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolJumpDown, false);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolJumpDown, false);
             }
             HandleJump();
             HandleMoviment();
@@ -117,38 +115,38 @@ public class PlayerTest : MonoBehaviour
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                circleCollider.radius = radiusRunDetection;
-                _CurrentSpeed = speedRun;
-                animation.SetBool(boolRun, true);
-                animation2.SetBool(boolRun, true);
+                circleCollider.radius = soPlayerSetup.radiusRunDetection;
+                _CurrentSpeed = soPlayerSetup.speedRun;
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, true);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolRun, true);
             }
             else
             {
-                circleCollider.radius = radiusWalkDetection;
-                _CurrentSpeed = speed;
-                animation.SetBool(boolRun, false);
-                animation2.SetBool(boolRun, false);
+                circleCollider.radius = soPlayerSetup.radiusWalkDetection;
+                _CurrentSpeed = soPlayerSetup.speed;
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, false);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolRun, false);
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 myRigidbody.velocity = new Vector2(-_CurrentSpeed, myRigidbody.velocity.y);
-                myRigidbody.transform.localScale = new Vector3(ScalePlayer, ScalePlayer, ScalePlayer);
-                animation.SetBool(boolWalk, true);
-                animation2.SetBool(boolWalk, true);
+                myRigidbody.transform.localScale = new Vector3(soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 myRigidbody.velocity = new Vector2(_CurrentSpeed, myRigidbody.velocity.y); 
-                myRigidbody.transform.localScale = new Vector3(-ScalePlayer, ScalePlayer, ScalePlayer);
-                animation.SetBool(boolWalk, true);
-                animation2.SetBool(boolWalk, true);
+                myRigidbody.transform.localScale = new Vector3(-soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
 
             }
             else
             {
-                animation.SetBool(boolWalk, false);
-                animation2.SetBool(boolWalk, false);
+                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, false);
+                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, false);
             }
 
                 
@@ -159,24 +157,63 @@ public class PlayerTest : MonoBehaviour
             }
             else if (myRigidbody.velocity.x > 0)
             {
-                myRigidbody.velocity -= friction;
+                myRigidbody.velocity -= soPlayerSetup.friction;
             }
             else if (myRigidbody.velocity.x < 0)
             {
-                myRigidbody.velocity += friction;
+                myRigidbody.velocity += soPlayerSetup.friction;
             }
 
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-
+            if(ReferenciaItem.ListSlotsGuns[0].codigo != 0)
             {
-                animation2.SetBool(boolGun, false);
-                Invoke(nameof(OperacaodeTempo), 1.5f);
+                activeGun();
+            }
+            else
+            {
+                desactiveGun();
+            } 
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (ReferenciaItem.ListSlotsGuns[1].codigo != 0)
+            {
+                activeGun();
+            }
+            else
+            {
+                desactiveGun();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (ReferenciaItem.ListSlotsGuns[2].codigo != 0)
+            {
+                activeGun();
+            }
+            else
+            {
+                desactiveGun();
             }
         }
 
 
+    }
+
+    private void activeGun()
+    {
+          _curretPlayerArms.SetBool(soPlayerSetup.TrigerGun1, true);
+          _curretPlayerArms.SetBool(soPlayerSetup.boolGun, true);
+          _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, true);
+        //Invoke(nameof(OperacaodeTempo), 1.5f);
+        
+    }
+    private void desactiveGun()
+    {
+         _curretPlayerArms.SetBool(soPlayerSetup.boolGun, false);
+         Invoke(nameof(OperacaodeTempo), 1.5f);
     }
 
     private void HandleJump()
@@ -185,7 +222,7 @@ public class PlayerTest : MonoBehaviour
         {
             if (InPlataform == true)
             {
-                myRigidbody.velocity = Vector2.up * forcejump;
+                myRigidbody.velocity = Vector2.up * soPlayerSetup.forcejump;
             }
             /*
             boxCollider = GetComponent<BoxCollider2D>();
@@ -212,15 +249,15 @@ public class PlayerTest : MonoBehaviour
 
     public void OperacaodeTempo()
     {
-        animation2.SetBool(boolNotGun, false);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, false);
     }
 
 
         public void KillPlayer()
     {
         ConditionKill = true;
-        animation.SetTrigger(TrigerKillPlayer);
-        animation2.SetTrigger(TrigerKillPlayer);
+        _curretPlayerLegs.SetTrigger(soPlayerSetup.TrigerKillPlayer);
+        _curretPlayerArms.SetTrigger(soPlayerSetup.TrigerKillPlayer);
     }
 
     public void RespawPlayerGame()
@@ -245,13 +282,12 @@ public class PlayerTest : MonoBehaviour
 
     public void colletGun()
     {
+        //Debug.Log("jsaghbfjiha " + ReferenciaItem.ListSlotsGuns[ReferenciaItem.selectrender].codigo);
 
-            if (animation2.GetBool(boolGun) == false)
-            {
-                animation2.SetBool(TrigerGun1, true);
-                animation2.SetBool(boolGun, true);
-                animation2.SetBool(boolNotGun, true);
-            }
+        if (ReferenciaItem.ListSlotsGuns[ReferenciaItem.selectrender].codigo != 0)
+        {
+            activeGun();
+        }
     }
 
 }

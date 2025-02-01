@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class HealthBasePlayer : MonoBehaviour
 {
+    [Header("setup")]
+    public SOPlayerSetup soPlayerSetup;
     public PlayerTest player;
-    public int StarLife = 10;
     public bool DestroyOnKill = false;
     public float dalayToKill = 0f;
 
@@ -18,19 +19,29 @@ public class HealthBasePlayer : MonoBehaviour
 
     public FlashColor _flashcolor;
 
+
     private void Awake()
     {
         ConditionInitLife();
-        if(_flashcolor == null)
+    }
+
+    private void Start()
+    {
+        Invoke(nameof(listColor), 1f);
+    }
+
+    private void listColor()
+    {
+        if (_flashcolor == null)
         {
-            _flashcolor = GetComponent<FlashColor>();
+            _flashcolor = GetComponentInChildren<FlashColor>();
         }
     }
 
     public void ConditionInitLife()
     {
         _isDead = false;
-        _currentLife = StarLife;
+        _currentLife = soPlayerSetup.Startlife;
         Menu.SetActive(false);
         MenuConditionVictory.SetActive(false);
         MenuConditionLoser.SetActive(false);
