@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerTest : MonoBehaviour
 {
-    public BoxCollider2D boxCollider; 
+    public BoxCollider2D boxCollider;
     public CircleCollider2D circleCollider;
     public Rigidbody2D myRigidbody;
 
     [Header("setup")]
     public SOPlayerSetup soPlayerSetup;
     public SOInfoUI ReferenciaItem;
-  
+
     public bool InPlataform = false;
     public Animator _curretPlayerLegs;
     public Animator _curretPlayerArms;
@@ -25,14 +25,39 @@ public class PlayerTest : MonoBehaviour
 
     private float _CurrentSpeed;
 
+    public ParticleSystem particleDirtRun;
+    public ParticleSystem particlesystemLand1;
+    public ParticleSystem particlesystemLand2;
+
+
+    [Header("Configurações camera")]
+    public GameObject Cam;
+    public float velCamMax = 12f;
+    public float positioncam = 15f;
+    public float directioncam = 1f;
+
+    private float velCam = 0;
+    private float velCammov = 10f;
+    private float maxPosition = 20f;
+
 
     public List<Animator> animacao;
+
+    //private ParticleSystem particleSystem;
+    private ParticleSystem.EmissionModule emission; // Módulo de emissão
+    private float currentSpeed;
+    private bool down = false;
 
 
     void Awake()
     {
-      
-        Vector2 vetorref = new Vector2(0,0);
+
+        emission = particleDirtRun.emission; // Acessa o módulo de emissão
+
+
+
+        Vector2 vetorref = new Vector2(0, 0);
+        Cam.transform.localPosition = new Vector3(positioncam, 0, 0);
         _curretPlayerLegs = Instantiate(soPlayerSetup.playerLegs, transform);
         //_curretPlayerLegs.transform.position = new Vector3(0, -1.51f, 0);
         //_curretPlayerArms = Instantiate(soPlayerSetup.referenceAnimator.referenceArm);
@@ -60,7 +85,7 @@ public class PlayerTest : MonoBehaviour
         _CurrentSpeed = soPlayerSetup.speed;
         boxCollider.isTrigger = false;
         ConditionKill = (false);
-        gameObject.SetActive(true); 
+        gameObject.SetActive(true);
         myRigidbody.transform.localScale = new Vector2(soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
         RespawPlayerGame();
         gameObject.transform.localPosition = soPlayerSetup.PositionInicial;
@@ -79,11 +104,18 @@ public class PlayerTest : MonoBehaviour
         if (!ConditionKill)
         {
 
+
             InPlataform = Physics2D.OverlapCircle(DetectPlataform.position, 0.5f, MaskPlataform);
             if (InPlataform)
             {
                 _curretPlayerLegs.SetBool(soPlayerSetup.boolJump, false);
                 _curretPlayerArms.SetBool(soPlayerSetup.boolJump, false);
+                if ((particlesystemLand1 != null) && (particlesystemLand2 != null) && (down))
+                {
+                    particlesystemLand1.Play();
+                    particlesystemLand2.Play();
+                    down = false;
+                }
             }
             else
             {
@@ -95,86 +127,112 @@ public class PlayerTest : MonoBehaviour
                 _curretPlayerLegs.SetBool(soPlayerSetup.boolJump, true);
                 _curretPlayerArms.SetBool(soPlayerSetup.boolJump, true);
             }
-            if(myRigidbody.velocity.y <= 0)
+            if (myRigidbody.velocity.y <= 0)
             {
                 _curretPlayerLegs.SetBool(soPlayerSetup.boolJumpDown, true);
                 _curretPlayerArms.SetBool(soPlayerSetup.boolJumpDown, true);
+                if (_curretPlayerLegs.GetBool(soPlayerSetup.boolJump) == true) 
+                { 
+                    down = true; 
+                }   
+                    
+                
             }
             else
             {
                 _curretPlayerLegs.SetBool(soPlayerSetup.boolJumpDown, false);
                 _curretPlayerArms.SetBool(soPlayerSetup.boolJumpDown, false);
+
             }
             HandleJump();
             HandleMoviment();
+            Movimentcam();
         }
     }
 
     private void HandleMoviment()
     {
 
-            if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            circleCollider.radius = soPlayerSetup.radiusRunDetection;
+            _CurrentSpeed = soPlayerSetup.speedRun;
+            _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, true);
+            _curretPlayerArms.SetBool(soPlayerSetup.boolRun, true);
+            if (particleDirtRun != null)
             {
-                circleCollider.radius = soPlayerSetup.radiusRunDetection;
-                _CurrentSpeed = soPlayerSetup.speedRun;
-                _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, true);
-                _curretPlayerArms.SetBool(soPlayerSetup.boolRun, true);
+                //particleDirtRun.Play();
+            }
+            if (InPlataform == true)
+            {
+                emission.enabled = true;
             }
             else
             {
-                circleCollider.radius = soPlayerSetup.radiusWalkDetection;
-                _CurrentSpeed = soPlayerSetup.speed;
-                _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, false);
-                _curretPlayerArms.SetBool(soPlayerSetup.boolRun, false);
+                emission.enabled = false;
             }
+        }
+        else
+        {
+            circleCollider.radius = soPlayerSetup.radiusWalkDetection;
+            _CurrentSpeed = soPlayerSetup.speed;
+            _curretPlayerLegs.SetBool(soPlayerSetup.boolRun, false);
+            _curretPlayerArms.SetBool(soPlayerSetup.boolRun, false);
+            //stopParticle();
+            emission.enabled = false;
+        }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                myRigidbody.velocity = new Vector2(-_CurrentSpeed, myRigidbody.velocity.y);
-                myRigidbody.transform.localScale = new Vector3(soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
-                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
-                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
-            }
-            else if (Input.GetKey(KeyCode.RightArrow))
-            {
-                myRigidbody.velocity = new Vector2(_CurrentSpeed, myRigidbody.velocity.y); 
-                myRigidbody.transform.localScale = new Vector3(-soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer, soPlayerSetup.ScalePlayer);
-                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
-                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            myRigidbody.velocity = new Vector2(-_CurrentSpeed, myRigidbody.velocity.y);
+            _curretPlayerLegs.transform.localScale = new Vector3(1, 1, 1);
+            _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
+            _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
+            velCammov = velCam * 2;
+            directioncam = -1;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            myRigidbody.velocity = new Vector2(_CurrentSpeed, myRigidbody.velocity.y);
+            _curretPlayerLegs.transform.localScale = new Vector3(-1, 1, 1);
+            _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, true);
+            _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, true);
+            velCammov = velCam * 2;
+            directioncam = 1;
+        }
+        else
+        {
+            velCammov = velCam;
+            _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, false);
+            _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, false);
+        }
 
-            }
-            else
-            {
-                _curretPlayerLegs.SetBool(soPlayerSetup.boolWalk, false);
-                _curretPlayerArms.SetBool(soPlayerSetup.boolWalk, false);
-            }
 
-                
 
         if ((myRigidbody.velocity.x < 0.2f) && (myRigidbody.velocity.x > -0.2f))
-            {
-                myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
-            }
-            else if (myRigidbody.velocity.x > 0)
-            {
-                myRigidbody.velocity -= soPlayerSetup.friction;
-            }
-            else if (myRigidbody.velocity.x < 0)
-            {
-                myRigidbody.velocity += soPlayerSetup.friction;
-            }
+        {
+            myRigidbody.velocity = new Vector2(0, myRigidbody.velocity.y);
+        }
+        else if (myRigidbody.velocity.x > 0)
+        {
+            myRigidbody.velocity -= soPlayerSetup.friction;
+        }
+        else if (myRigidbody.velocity.x < 0)
+        {
+            myRigidbody.velocity += soPlayerSetup.friction;
+        }
 
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if(ReferenciaItem.ListSlotsGuns[0].codigo != 0)
+            if (ReferenciaItem.ListSlotsGuns[0].codigo != 0)
             {
                 activeGun();
             }
             else
             {
                 desactiveGun();
-            } 
+            }
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -202,18 +260,39 @@ public class PlayerTest : MonoBehaviour
 
     }
 
+
+    private void Movimentcam()
+    {
+
+
+        if ((directioncam == 1) && (positioncam < maxPosition))
+        {
+            positioncam += velCammov * directioncam * Time.deltaTime;
+            Cam.transform.localPosition = new Vector3(positioncam, 0, 0);
+            velCam = Mathf.Lerp(velCamMax, 1f, ((positioncam) + maxPosition) / (maxPosition * 2));
+        }
+        else if ((directioncam == -1) && (positioncam > -maxPosition))
+        {
+            positioncam += velCammov * directioncam * Time.deltaTime;
+            Cam.transform.localPosition = new Vector3(positioncam, 0, 0);
+            velCam = Mathf.Lerp(velCamMax, 1f, ((maxPosition * 2) - ((positioncam) + maxPosition)) / (maxPosition * 2));
+        }
+
+
+    }
+
     private void activeGun()
     {
-          _curretPlayerArms.SetBool(soPlayerSetup.TrigerGun1, true);
-          _curretPlayerArms.SetBool(soPlayerSetup.boolGun, true);
-          _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, true);
+        _curretPlayerArms.SetBool(soPlayerSetup.TrigerGun1, true);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolGun, true);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, true);
         //Invoke(nameof(OperacaodeTempo), 1.5f);
-        
+
     }
     private void desactiveGun()
     {
-         _curretPlayerArms.SetBool(soPlayerSetup.boolGun, false);
-         Invoke(nameof(OperacaodeTempo), 1.5f);
+        _curretPlayerArms.SetBool(soPlayerSetup.boolGun, false);
+        Invoke(nameof(OperacaodeTempo), 1.5f);
     }
 
     private void HandleJump()
@@ -253,7 +332,7 @@ public class PlayerTest : MonoBehaviour
     }
 
 
-        public void KillPlayer()
+    public void KillPlayer()
     {
         ConditionKill = true;
         _curretPlayerLegs.SetTrigger(soPlayerSetup.TrigerKillPlayer);
@@ -261,7 +340,7 @@ public class PlayerTest : MonoBehaviour
     }
 
     public void RespawPlayerGame()
-    {        
+    {
         ConditionKill = false;
     }
 
@@ -279,15 +358,20 @@ public class PlayerTest : MonoBehaviour
         // Aplica a nova cor ao sprite
         spriteRenderer.color = color;
     }*/
-
+    private void stopParticle()
+    {
+        if (particleDirtRun != null)
+        {
+            //particleDirtRun.emission.enabled = false;
+        }
+    }
     public void colletGun()
     {
-        //Debug.Log("jsaghbfjiha " + ReferenciaItem.ListSlotsGuns[ReferenciaItem.selectrender].codigo);
-
         if (ReferenciaItem.ListSlotsGuns[ReferenciaItem.selectrender].codigo != 0)
         {
             activeGun();
         }
     }
+
 
 }

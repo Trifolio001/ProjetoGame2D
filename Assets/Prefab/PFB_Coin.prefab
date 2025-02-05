@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7517278190607504321}
+  - component: {fileID: 4771042874535345158}
+  - component: {fileID: 935914035366801357}
   m_Layer: 9
   m_Name: PFB_Coin
   m_TagString: Untagged
@@ -28,9 +30,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7517278191846497421}
+  - {fileID: 8357612972292585712}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4771042874535345158
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517278190607504326}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.18
+--- !u!114 &935914035366801357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7517278190607504326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52560439bb864e48975815b2aef4602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compareTag: Player
+  particlesystem: {fileID: 8357612972292585615}
+  timeToHide: 2
+  graphicItem: {fileID: 7517278191846497410}
+  soCoinSetup: {fileID: 11400000, guid: 3ccbe3dab79ce3a40bdb5a196872421c, type: 2}
+  spritRender: {fileID: 0}
 --- !u!1 &7517278191846497410
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,8 +78,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7517278191846497421}
   - component: {fileID: 7517278191846497422}
-  - component: {fileID: 7517278191846497423}
-  - component: {fileID: 7517278191846497420}
   m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
@@ -115,43 +150,70 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7517278191846497423
-BoxCollider2D:
+--- !u!1001 &1837818104978717496
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7517278191846497410}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.000957489, y: 0.10256529}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.76, y: 5.51}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.965065, y: 3.6454477}
-  m_EdgeRadius: 0
---- !u!114 &7517278191846497420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    m_TransformParent: {fileID: 7517278190607504321}
+    m_Modifications:
+    - target: {fileID: 7673299664987980725, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_Name
+      value: PFB_Particle_coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+--- !u!4 &8357612972292585712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7673299664987980744, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+  m_PrefabInstance: {fileID: 1837818104978717496}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7517278191846497410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52560439bb864e48975815b2aef4602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  compareTag: Player
-  soCoinSetup: {fileID: 11400000, guid: 3ccbe3dab79ce3a40bdb5a196872421c, type: 2}
+--- !u!198 &8357612972292585615 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7673299664987980727, guid: 0882f2be74f58464caa5fd08074e5cab, type: 3}
+  m_PrefabInstance: {fileID: 1837818104978717496}
+  m_PrefabAsset: {fileID: 0}

@@ -13,7 +13,7 @@ public class GunBase : MonoBehaviour
 
     private void Awake()
     {
-        PlayerSideReference = GetComponentInParent<PlayerTest>().gameObject.transform;
+        //PlayerSideReference = GetComponentInParent<PlayerPrefs.>().gameObject.transform;
     }
 
     private void Update()

@@ -792,7 +792,7 @@ GameObject:
   - component: {fileID: 1928252538962415958}
   - component: {fileID: 3330944598059324415}
   m_Layer: 7
-  m_Name: MovimentPersonagemTexture 1
+  m_Name: NormalPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   prefabProjetil: {fileID: 8882230680667771714, guid: 27c05d7789f0e08448247777c7ab36c0, type: 3}
   positionToShoot: {fileID: 1373501847873558988}
   timeBetweenShoot: 0.3
-  PlayerSideReference: {fileID: 0}
+  PlayerSideReference: {fileID: 9076065457616432377}
 --- !u!1 &6356890293299070649
 GameObject:
   m_ObjectHideFlags: 0

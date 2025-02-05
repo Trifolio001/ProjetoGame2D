@@ -7,11 +7,14 @@ public class Item_coin_Collet : Colect_Base
 
     [Header("setup")]
     public SOValueCoins soCoinSetup;
-    private SpriteRenderer spritRender;
+    public SpriteRenderer spritRender;
+
+
+
 
     private void Awake()
     {
-        spritRender = GetComponent<SpriteRenderer>();
+        spritRender = GetComponentInChildren<SpriteRenderer>();
         spritRender.color = soCoinSetup.color;
     }
 
@@ -20,4 +23,6 @@ public class Item_coin_Collet : Colect_Base
         base.OnCollect();
         Item_manager.Instance.AddCoin(soCoinSetup.value);
     }
+
+
 }

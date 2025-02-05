@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLegs: {fileID: 1928252538962415945, guid: e2432cca32d8a6c42806a763ee0a3442, type: 3}
   Startlife: 0
-  PositionInicial: {x: -11.29, y: 0.74}
+  PositionInicial: {x: -14.7, y: 1}
   ScalePlayer: 0.8
   friction: {x: 0.1, y: 0}
   speed: 5
   speedRun: 10
   forcejump: 20
-  radiusWalkDetection: 30
-  radiusRunDetection: 60
+  radiusWalkDetection: 45
+  radiusRunDetection: 90
   boolRun: IsRun
   boolWalk: IsWalk
   boolJump: IsJump

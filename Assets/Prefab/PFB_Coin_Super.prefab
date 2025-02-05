@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 612701010000685891}
+  - component: {fileID: 1517454503146504921}
+  - component: {fileID: 6833099495405386622}
   m_Layer: 9
   m_Name: PFB_Coin_Super
   m_TagString: Untagged
@@ -28,9 +30,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 612701011175515151}
+  - {fileID: 2942693920364665955}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1517454503146504921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612701010000685892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52560439bb864e48975815b2aef4602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  compareTag: Player
+  particlesystem: {fileID: 2942693920364665884}
+  timeToHide: 2
+  graphicItem: {fileID: 612701011175515136}
+  soCoinSetup: {fileID: 11400000, guid: fc6e3f64ac0016345810b5404646bfd3, type: 2}
+  spritRender: {fileID: 0}
+--- !u!58 &6833099495405386622
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 612701010000685892}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.14
 --- !u!1 &612701011175515136
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,8 +78,6 @@ GameObject:
   m_Component:
   - component: {fileID: 612701011175515151}
   - component: {fileID: 612701011175515148}
-  - component: {fileID: 612701011175515149}
-  - component: {fileID: 612701011175515150}
   m_Layer: 9
   m_Name: Square
   m_TagString: Untagged
@@ -115,43 +150,82 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &612701011175515149
-BoxCollider2D:
+--- !u!1001 &801705096487215252
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612701011175515136}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.000957489, y: 0.10256529}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.76, y: 5.51}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.965065, y: 3.6454477}
-  m_EdgeRadius: 0
---- !u!114 &612701011175515150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    m_TransformParent: {fileID: 612701010000685891}
+    m_Modifications:
+    - target: {fileID: 2591458807594105992, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.48584908
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594105992, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.48584908
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594105992, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594105994, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_Name
+      value: PFB_Particle_coin_super
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+--- !u!4 &2942693920364665955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2591458807594106103, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+  m_PrefabInstance: {fileID: 801705096487215252}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612701011175515136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c52560439bb864e48975815b2aef4602, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  compareTag: Player
-  soCoinSetup: {fileID: 11400000, guid: fc6e3f64ac0016345810b5404646bfd3, type: 2}
+--- !u!198 &2942693920364665884 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2591458807594105992, guid: f210d5e62e50c2444981beeaf4b4b7fa, type: 3}
+  m_PrefabInstance: {fileID: 801705096487215252}
+  m_PrefabAsset: {fileID: 0}

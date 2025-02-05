@@ -6,7 +6,7 @@ public class ProjectileBase : MonoBehaviour
 {
 
     public SOBullet soBullet;
-    public float side = 1;
+    public float side = 2;
 
 
     void Update()
@@ -31,9 +31,16 @@ public class ProjectileBase : MonoBehaviour
 
         if(enimy != null)
         {
+            VFXBullet();
             enimy.Damage(soBullet.damage);
             Destroy(gameObject);
         }
+    }
+
+    public void VFXBullet()
+    {
+        VFXManeger.Instance.PlayVFXByTipe(VFXManeger.VFXType.BulletEfect, transform.position, -transform.localScale.x);
+
     }
 
 }
