@@ -70,6 +70,20 @@ public class SOUtilityUpdate : MonoBehaviour
             soInfoUI.selectrender = 2;
             SelectedOption();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(uiOptions.active == false)
+            {
+                OpenOption();
+            }else if (uiVolume.active == true)
+            {
+                OpenOption();
+            }
+            else
+            {
+                CloseOption();
+            }
+        }
 
     }
 

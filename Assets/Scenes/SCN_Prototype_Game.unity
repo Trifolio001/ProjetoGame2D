@@ -3320,9 +3320,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
-        m_MethodName: CloseOption
+        m_MethodName: UnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3332,9 +3332,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
-        m_MethodName: UnPause
+        m_MethodName: CloseOption
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3688,7 +3688,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10157,6 +10157,71 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &749094863
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749094864}
+  - component: {fileID: 749094865}
+  m_Layer: 5
+  m_Name: OrganizationCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &749094864
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749094863}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 983350551}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &749094865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749094863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45072a6b324377d4ca705c1a210a9d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soInfoUI: {fileID: 11400000, guid: 5b135971bdeb3a6468de4300578ec213, type: 2}
+  uiTextValue: {fileID: 26389866}
+  a0: {fileID: 879490920}
+  a1: {fileID: 1366339908}
+  a2: {fileID: 1830246273}
+  select: {fileID: 21300000, guid: 9654c1c6781633e4b92ca9dc23a6b62e, type: 3}
+  notselect: {fileID: 21300000, guid: 38522710133938346a5dc5bea0a03585, type: 3}
+  slot0: {fileID: 1892110630}
+  slot1: {fileID: 1893028540}
+  slot2: {fileID: 411215104}
+  audioselect: {fileID: 1451033839}
+  uiVisible: {fileID: 1409615154}
+  uiOptions: {fileID: 1209679718}
+  uiVolume: {fileID: 1936957002}
+  uiLost: {fileID: 2050796349}
+  uiWin: {fileID: 1981245907}
+  isPaused: 0
 --- !u!1 &757123204
 GameObject:
   m_ObjectHideFlags: 0
@@ -10498,7 +10563,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
         m_MethodName: OpenVolume
         m_Mode: 1
@@ -12321,7 +12386,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -13555,7 +13620,6 @@ GameObject:
   - component: {fileID: 983350550}
   - component: {fileID: 983350549}
   - component: {fileID: 983350548}
-  - component: {fileID: 983350552}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -13641,6 +13705,7 @@ RectTransform:
   - {fileID: 1017194823}
   - {fileID: 2065533212}
   - {fileID: 917406625}
+  - {fileID: 749094864}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13649,35 +13714,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &983350552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983350547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45072a6b324377d4ca705c1a210a9d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soInfoUI: {fileID: 11400000, guid: 5b135971bdeb3a6468de4300578ec213, type: 2}
-  uiTextValue: {fileID: 26389866}
-  a0: {fileID: 879490920}
-  a1: {fileID: 1366339908}
-  a2: {fileID: 1830246273}
-  select: {fileID: 21300000, guid: 9654c1c6781633e4b92ca9dc23a6b62e, type: 3}
-  notselect: {fileID: 21300000, guid: 38522710133938346a5dc5bea0a03585, type: 3}
-  slot0: {fileID: 1892110630}
-  slot1: {fileID: 1893028540}
-  slot2: {fileID: 411215104}
-  audioselect: {fileID: 1451033839}
-  uiVisible: {fileID: 1409615154}
-  uiOptions: {fileID: 1209679718}
-  uiVolume: {fileID: 1936957002}
-  uiLost: {fileID: 2050796349}
-  uiWin: {fileID: 1981245907}
-  isPaused: 0
 --- !u!1 &987090406
 GameObject:
   m_ObjectHideFlags: 0
@@ -16537,9 +16573,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
-        m_MethodName: OpenOption
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16549,9 +16585,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
-        m_MethodName: Pause
+        m_MethodName: OpenOption
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17481,8 +17517,8 @@ RectTransform:
   m_Father: {fileID: 1118005562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.75, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.000030517578, y: 0.0000076293945}
   m_SizeDelta: {x: 44.705, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -18945,10 +18981,10 @@ RectTransform:
   m_Father: {fileID: 595159433}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 495.267, y: -52.435}
-  m_SizeDelta: {x: 220, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1340804304
 MonoBehaviour:
@@ -20908,8 +20944,8 @@ RectTransform:
   m_Father: {fileID: 1336377557}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.75, y: 0}
-  m_AnchorMax: {x: 0.75, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -0.000030517578, y: 0.0000076293945}
   m_SizeDelta: {x: 44.705, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -20968,7 +21004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1409615155
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23335,7 +23371,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 983350552}
+      - m_Target: {fileID: 749094865}
         m_TargetAssemblyTypeName: SOUtilityUpdate, Assembly-CSharp
         m_MethodName: OpenOption
         m_Mode: 1
@@ -28125,10 +28161,10 @@ RectTransform:
   m_Father: {fileID: 595159433}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175.267, y: -52.435}
-  m_SizeDelta: {x: 220, y: 60}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1848061651
 MonoBehaviour:
@@ -29851,7 +29887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1936957003
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32832,7 +32868,7 @@ PrefabInstance:
     - target: {fileID: 422923122974885826, guid: 5f5e4e6c2aebd9d4e936043deadb229d, type: 3}
       propertyPath: soUtility
       value: 
-      objectReference: {fileID: 983350552}
+      objectReference: {fileID: 749094865}
     - target: {fileID: 422923122974885826, guid: 5f5e4e6c2aebd9d4e936043deadb229d, type: 3}
       propertyPath: MenuConditionLoser
       value: 
