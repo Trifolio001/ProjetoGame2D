@@ -11,6 +11,7 @@ public class ProjectileBase : MonoBehaviour
 
     void Update()
     {
+
         Vector3 direction = new Vector3(-soBullet.velocity, 0, 0);
         transform.Translate(direction * Time.deltaTime * side);
     }

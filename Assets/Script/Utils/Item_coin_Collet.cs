@@ -11,7 +11,6 @@ public class Item_coin_Collet : Colect_Base
 
 
 
-
     private void Awake()
     {
         spritRender = GetComponentInChildren<SpriteRenderer>();
@@ -22,6 +21,7 @@ public class Item_coin_Collet : Colect_Base
     {        
         base.OnCollect();
         Item_manager.Instance.AddCoin(soCoinSetup.value);
+        
     }
 
 

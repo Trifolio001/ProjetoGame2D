@@ -12,5 +12,10 @@ public class UIGameManeger : Singleton<UIGameManeger>
     {
         uiTextCoins.text = s;
     }
+
+    public void PressOption()
+    {
+
+    }
     
 }

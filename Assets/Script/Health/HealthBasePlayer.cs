@@ -10,9 +10,10 @@ public class HealthBasePlayer : MonoBehaviour
     public bool DestroyOnKill = false;
     public float dalayToKill = 0f;
 
-    public GameObject Menu;
-    public GameObject MenuConditionVictory;
-    public GameObject MenuConditionLoser;
+    public SOUtilityUpdate soUtility;
+    //public GameObject Menu;
+    //public GameObject MenuConditionVictory;
+    //public GameObject MenuConditionLoser;
 
     private int _currentLife;
     private bool _isDead = false;
@@ -22,7 +23,7 @@ public class HealthBasePlayer : MonoBehaviour
 
     private void Awake()
     {
-        ConditionInitLife();
+        //ConditionInitLife();
     }
 
     private void Start()
@@ -38,14 +39,14 @@ public class HealthBasePlayer : MonoBehaviour
         }
     }
 
-    public void ConditionInitLife()
+    /*public void ConditionInitLife()
     {
         _isDead = false;
         _currentLife = soPlayerSetup.Startlife;
-        Menu.SetActive(false);
+        soUtility.uiVisible.SetActive(false);
         MenuConditionVictory.SetActive(false);
         MenuConditionLoser.SetActive(false);
-    }
+    }*/
 
     public void Damage(int damage)
     {
@@ -64,10 +65,11 @@ public class HealthBasePlayer : MonoBehaviour
 
     public void VictoryPlayer()
     {
-        Debug.Log("passou aki");
-        Menu.SetActive(true);
-        MenuConditionVictory.SetActive(true);
-        MenuConditionLoser.SetActive(false);
+        soUtility.uiVisible.SetActive(true);
+        soUtility.uiVolume.SetActive(false);
+        soUtility.uiOptions.SetActive(false);
+        soUtility.uiLost.SetActive(false);
+        soUtility.uiWin.SetActive(true);
     }
 
     public void kill()
@@ -84,8 +86,10 @@ public class HealthBasePlayer : MonoBehaviour
     {
         player.KillPlayer();
         yield return new WaitForSeconds(2);
-        Menu.SetActive(true);
-        MenuConditionVictory.SetActive(false);
-        MenuConditionLoser.SetActive(true);
+        soUtility.uiVisible.SetActive(true);
+        soUtility.uiVolume.SetActive(false);
+        soUtility.uiOptions.SetActive(false);
+        soUtility.uiLost.SetActive(true);
+        soUtility.uiWin.SetActive(false);
     }
 }

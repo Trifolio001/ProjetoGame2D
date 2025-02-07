@@ -48,6 +48,8 @@ public class PlayerTest : MonoBehaviour
     private float currentSpeed;
     private bool down = false;
 
+    public AudioRandomPlayAudioClips audiorandom;
+
 
     void Awake()
     {
@@ -69,6 +71,11 @@ public class PlayerTest : MonoBehaviour
             Debug.Log(a);
         }
         _curretPlayerArms = animacao[animacao.Count - 1];
+
+        foreach (var child in transform.GetComponentsInChildren<AudioRandomPlayAudioClips>())
+        {
+            audiorandom = child;
+        }
 
         soPlayerSetup.PositionInicial = transform.position;
         ConditionInitial();
@@ -101,7 +108,7 @@ public class PlayerTest : MonoBehaviour
     void Update()
     {
 
-        if (!ConditionKill)
+        if ((!ConditionKill))
         {
 
 
@@ -114,6 +121,8 @@ public class PlayerTest : MonoBehaviour
                 {
                     particlesystemLand1.Play();
                     particlesystemLand2.Play();
+                    tocaaudio();
+                    Invoke(nameof(tocaaudio), 0.1f);
                     down = false;
                 }
             }
@@ -373,5 +382,13 @@ public class PlayerTest : MonoBehaviour
         }
     }
 
+    public void tocaaudio()
+    {
+        if (audiorandom != null)
+        {
+            audiorandom.PlayRandom();
+        }
+    }
 
+   
 }

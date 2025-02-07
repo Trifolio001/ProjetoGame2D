@@ -13,6 +13,9 @@ public class Colect_Base : MonoBehaviour
 
     private bool capture = false;
 
+    [Header("Sounds")]
+    public AudioSource audioSource;
+
     private void Awake()
     {
         capture = false;
@@ -34,16 +37,25 @@ public class Colect_Base : MonoBehaviour
         if (graphicItem != null) { 
             graphicItem.SetActive(false); 
         }
+
         Invoke("HideObject", timeToHide);
         OnCollect();
     }
 
     protected virtual void OnCollect()
     {
-        if ((particlesystem != null) && (!capture))
+        if (!capture)
         {
-            particlesystem.Play();
-            capture = true;
+            if (particlesystem != null)
+            {
+                particlesystem.Play();
+                capture = true;
+            }
+
+            if (audioSource != null) 
+            { 
+                audioSource.Play(); 
+            }
         }
     }
 
