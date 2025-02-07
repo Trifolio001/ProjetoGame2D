@@ -337,7 +337,10 @@ public class PlayerTest : MonoBehaviour
 
     public void OperacaodeTempo()
     {
-        _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, false);
+        if (ReferenciaItem.ListSlotsGuns[ReferenciaItem.selectrender].codigo == 0)
+        {
+            _curretPlayerArms.SetBool(soPlayerSetup.boolNotGun, false);
+        }
     }
 
 
