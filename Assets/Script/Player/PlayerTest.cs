@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 public class PlayerTest : MonoBehaviour
 {
@@ -49,6 +51,7 @@ public class PlayerTest : MonoBehaviour
     private bool down = false;
 
     public AudioRandomPlayAudioClips audiorandom;
+    public AudioSource songjump;
 
 
     void Awake()
@@ -311,6 +314,10 @@ public class PlayerTest : MonoBehaviour
             if (InPlataform == true)
             {
                 myRigidbody.velocity = Vector2.up * soPlayerSetup.forcejump;
+                if (songjump != null)
+                {
+                    songjump.Play();
+                }
             }
             /*
             boxCollider = GetComponent<BoxCollider2D>();

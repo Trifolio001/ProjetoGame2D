@@ -107,6 +107,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-3708286383599980666
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: bc428c8f3a755b94fb28c47ab0db3408
+  m_EffectName: Attenuation
+  m_MixLevel: ad3b16e5ffdcad84db0adf80c2052421
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-3551416320905467606
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -264,6 +278,7 @@ AudioMixerSnapshotController:
     ee37f8e22c43fe84b9cc5e19ebf766b0: -13.637256
     ab9c9835fb444084ea7ae9a468c6930a: 0.523
     b7374da5af485534ab78c2d932a3d53e: 0
+    0683b8b57bba28942a48d55331e16fda: 9.925883
     3aeff517520fa06419e6869834720eec: -4.9356413
     f058af570a757674fb918436cf6c446f: 0.051999997
     fa2df0d72b7f4fa43a46f25271932bd1: 2.89
@@ -314,9 +329,10 @@ AudioMixerController:
     - 2ad42d6ed2197224a9c9073e90edb94e
     - f4bd9305966c22847beeddf554c63c69
     - 2089d371e12fc3a42b1e12dbdca39f93
+    - a2ef7cdab3d4c7a4795f629fb9aea214
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: -119553637321752715}
+  m_TargetSnapshot: {fileID: 24500006}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -368,6 +384,7 @@ AudioMixerSnapshotController:
     ee37f8e22c43fe84b9cc5e19ebf766b0: -13.637256
     ab9c9835fb444084ea7ae9a468c6930a: 0
     13e88085e35de1240b49ffccba855373: -3.184112
+    0683b8b57bba28942a48d55331e16fda: 9.925883
     3aeff517520fa06419e6869834720eec: -4.560346
     6da790d887bbdf64db50d6a60ef084aa: 0
     d96dc91a6f4bfb74ca3108d13baf6bf2: -11.944499
@@ -559,6 +576,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &8382538651117366516
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a2ef7cdab3d4c7a4795f629fb9aea214
+  m_Children: []
+  m_Volume: 0683b8b57bba28942a48d55331e16fda
+  m_Pitch: 206e69c0c66a6b84eb474982e27d23e6
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -3708286383599980666}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!243 &8435670148623454742
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -570,6 +606,7 @@ AudioMixerGroupController:
   m_GroupID: 04df9ba1bdc445a43ae888988a2782a9
   m_Children:
   - {fileID: -1311783599553847997}
+  - {fileID: 8382538651117366516}
   - {fileID: 2750750108529668740}
   m_Volume: 1cf86ff7992a3024280f93509fa42387
   m_Pitch: d90289497f4f95a4b87b411d5ec30f1d
